@@ -9,6 +9,26 @@
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
-    <button id="button" onclick="playRound">play Round.</button>
+    <h1>Rock, Paper, Scissors</h1>
+    <div class="flex-container--choices">
+        <div class="flex-item--choice">
+            <button id="Rock" onclick="playRound(this.id)">Rock</button>
+        </div>
+        <div class="flex-item--choice">
+            <button id="Paper" onclick="playRound(this.id)">Paper</button>
+        </div>
+        <div class="flex-item--choice">
+            <button id="Scissors" onclick="playRound(this.id)">Scissors</button>
+        </div>
+    </div>
+
+    <h2 id="message"></h2>
+
+    <div class="flex-container--admin">
+        <p class="flex-item--score" id="player_score">Player: 0</p>
+        <p class="flex-item--score" id="ai_score">AI: 0</p>
+    </div>
+
+    <button class="btn---play-again" onclick="playAgain">Play Again</button>
 </body>
 </html>

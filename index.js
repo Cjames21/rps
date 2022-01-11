@@ -1,88 +1,68 @@
-const hands = ["Rock", "Paper", "Scissors"];
+
 var playerScore = 0;
-var AIScore = 0;
+var aiScore = 0;
+    
+var btnPlayerScore;
+var btnAIScore;
+var textMessage;
 
-function playRound() {
-    let aiPlay = getComputerPlay();
-    let pcPlay = getInput();
-    whoWon(pcPlay, aiPlay);
 
-    let playAgain = prompt();
-    if(playAgain == "Y") {
-        playRound();
-    }
-    else{
-        return;
-    }
+// TODO: Rework buttons to have listeners
+window.onload = function() {    
+    btnPlayerScore = document.getElementById("player_score");
+    btnAIScore = document.getElementById("ai_score");
+    textMessage = document.getElementById("message");  
 }
 
-
-// Returns string of AI's choice to a variable.
-function getComputerPlay() {
-    let rand = Math.random() * 3;
-    let choice = "";
-    switch(rand){
-        case(rand <= 1):
-            choice = "Rock";
-            break;
-        case(rand <= 2 && rand > 1):
-            choice = "Paper";
-            break;
-        case(rand > 2):
-            choice = "Scissors";
-            break;
+function playRound(playerChoice) {
+        
+    let aiString = "";
+    let aiChoice = Math.floor(Math.random() * 3) + 1;
+    if(aiChoice == 1) {
+        aiString = "Rock";
+    } else if(aiChoice == 2) {
+        aiString = "Paper";
+    }
+    else if (aiChoice == 3) {
+        aiString = "Scissors";
     }
 
-    if(choice == "") {
-        console.log("Something went wrong with the computer");
-        return;
+    console.log(playerChoice + " " + aiString);
+
+    if(playerChoice == "Paper" && aiString == "Rock") {
+        playerWins();
     }
-
-    return choice;
-}
-
-// Returns string of player input to a variable.
-function getInput() {
-    console.log("Enter 1, 2, or 3 for Rock, Paper Scissors respectively.")
-    let input = prompt();
-
-    if(input !== 1 || input !== 2 || input != 3) {
-        console.log("Something went wrong.");
-        return;
+    else if(playerChoice == "Rock" && aiString == "Scissors") {
+        playerWins();
+    }
+    else if(playerChoice == "Scissors" && aiString == "Paper") {
+        playerWins();
     }
     else {
-        if(input == 1) {
-
-        }
+        aiWins();
     }
-    return input;
+    
 }
 
-function whoWon(playerChoice, AIChoice) {
-    if(playerChoice == "Rock" && AIChoice == "Scissors") {
-        scoreIncrease("Player");
-    } 
-    else if (playerChoice == "Scissors" && AIChoice == "Paper") {
-        scoreIncrease("Player");
-    } 
-    else if(playerChoice == "Paper" && AIChoice == "") {
-        scoreIncrease("Player");
-    }
-    else {
-        scoreIncrease("");
-    }
+function playerWins() {
+    playerScore += 1;
+    btnPlayerScore.textContent = "Player Score: " + playerScore;
+    textMessage.textContent = "Player Wins!";
 }
 
-function scoreIncrease(player) {
-    if(player == "Player") {
-        playerScore += 1;
-        console.log("Player Won!");
-        console.log("Would you like to play again? (Y/N)");
-    }
-    else {
-        console.log("AI Won!");
-        console.log("Would you like to play again? (Y/N)");
-        AIScore += 1;
-    }
+function aiWins() {
+    aiScore += 1;
+    btnAIScore.textContent = "AI Score: " + aiScore;
+    textMessage.textContent = "AI Wins!";
 }
+
+function playAgain() {
+    playerScore = 0;
+    btnPlayerScore.textContent = "Player Score: " + playerScore; 
+    aiScore = 0;
+    btnAIScore.textContent = "AI Score: " + aiScore;
+    textMessage.textContent = "";
+}
+
+
 

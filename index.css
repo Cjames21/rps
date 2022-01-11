@@ -1,0 +1,10 @@
+.flex-container--choices {
+    width: 400px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flex-item--choice button {
+    font-size: 2em;
+
+}
